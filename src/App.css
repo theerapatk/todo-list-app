@@ -1,0 +1,17 @@
+form {
+	display: block;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.task-label {
+	width: 200px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.header-element {
+	display: inline-block;
+}
