@@ -17,7 +17,7 @@ class Checkbox extends Component {
 
   render() {
     return (
-       <input type="checkbox" checked={this.state.checked} onClick={this.toggleCheckbox}/>
+       <input type="checkbox" checked={this.state.checked} onChange={this.toggleCheckbox}/>
     );
   }
 }

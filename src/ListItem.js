@@ -10,12 +10,17 @@ class ListItem extends Component {
       completed: this.props.item.completed,
       id: this.props.item.id
     };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    this.props.onClick(e);
   }
 
   render() {
     return (
     	<li>
-       	<Checkbox checked={this.state.completed}/><Task item={this.state.item}/>
+       	<Checkbox checked={this.state.completed}/><Task item={this.state.item} onClick={this.handleClick}/>
       </li>
     );
   }

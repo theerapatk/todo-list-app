@@ -7,17 +7,18 @@ class Task extends Component {
       item: this.props.item,
       modalActive: false
     };
-    this.onClick = this.onClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  onClick() {
-    this.props.onClickItemLabel();
+  handleClick(e) {
+    // e.taskId = this.state.item.id;
+    this.props.onClick(e);
   }
 
   render() {
     return (
       <span>
-        <span className="task-label" onClick={this.onClick}>{this.state.item.title}</span>
+        <span className="task-label" onClick={this.handleClick}>{this.state.item.title}</span>
       </span>
     );
   }
