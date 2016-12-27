@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodoHeader from './TodoHeader';
+import TodoFilter from './TodoFilter';
 import TodoList from './TodoList';
 import TodoDialog from './TodoDialog';
 
@@ -11,7 +12,8 @@ class TodoApp extends Component {
       isDialogActive: false,
       isEditing: false,
       defaultValue: '',
-      taskId: null
+      taskId: null,
+      filterType: 'all'
     };
     this.handleOpenTodoDialog = this.handleOpenTodoDialog.bind(this);
     this.handleCloseTodoDialog = this.handleCloseTodoDialog.bind(this);
@@ -50,6 +52,7 @@ class TodoApp extends Component {
     return (
       <div>
         <TodoHeader onClickAddBotton={this.handleOpenTodoDialog}/>
+        <TodoFilter/>
         <TodoDialog
           isDialogActive={this.state.isDialogActive}
           isEditing={this.state.isEditing}
@@ -59,7 +62,7 @@ class TodoApp extends Component {
         <div>
           {'Add #' + (this.state.items.length)}
         </div>
-        <TodoList items={this.state.items} onClickItemLabel={this.handleOpenTodoDialog}/>
+        <TodoList filterType={this.state.filterType} items={this.state.items} onClickItemLabel={this.handleOpenTodoDialog}/>
       </div>
     );
   }

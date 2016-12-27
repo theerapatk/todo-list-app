@@ -15,7 +15,7 @@ class TodoList extends Component {
     return (
       <ul>
         {this.props.items.map(item => (
-          <ListItem key={item.id} item={item} onClick={this.handleClick}/>
+        	<ListItem key={item.id} item={item} onClick={this.handleClick}/>
         ))}
       </ul>
     );
