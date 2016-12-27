@@ -7,8 +7,8 @@ class TodoList extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-	handleClick(e) {
-		this.props.onClickItemLabel(e);
+	handleClick(e, taskId) {
+		this.props.onClickItemLabel(e, taskId);
   }
 
   render() {

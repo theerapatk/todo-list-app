@@ -17,9 +17,9 @@ class TodoApp extends Component {
     this.handleCloseTodoDialog = this.handleCloseTodoDialog.bind(this);
   }
 
-  handleOpenTodoDialog(e) {
+  handleOpenTodoDialog(e, taskId) {
     if (e.target.classList.value === 'task-label') {
-      this.setState({isEditing: true, defaultValue: e.target.textContent, taskId: e.taskId});
+      this.setState({isEditing: true, defaultValue: e.target.textContent, taskId: taskId});
     } else {
       this.setState({isEditing: false, defaultValue: '', taskId: null});
     }
@@ -30,13 +30,14 @@ class TodoApp extends Component {
     this.setState({isDialogActive: false});
     if (newItem != null) {
       if (this.state.isEditing === true) {
-        var copyItems = this.state.items.slice();
-        for (let i = 0; i < copyItems; i++) {
-          if (copyItems[i].taskId === this.state.taskId) {
-            copyItems[i] = newItem;
+        var newItems = this.state.items.slice();
+        for (let i = 0; i < newItems.length; i++) {
+          if (newItems[i].id === this.state.taskId) {
+            newItems[i] = newItem;
+            break;
           }
         }
-        this.setState({items: copyItems});
+        this.setState({items: newItems});
       } else {
         this.setState((prevState) => ({
           items: prevState.items.concat(newItem),
@@ -52,6 +53,7 @@ class TodoApp extends Component {
         <TodoDialog
           isDialogActive={this.state.isDialogActive}
           isEditing={this.state.isEditing}
+          taskId={this.state.taskId}
           defaultValue={this.state.defaultValue}
           onCloseDialog={this.handleCloseTodoDialog}/>
         <div>

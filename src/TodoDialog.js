@@ -35,7 +35,7 @@ class TodoDialog extends Component {
     var newItem = {
       title: this.title,
       completed: false,
-      id: Date.now()
+      id: this.props.taskId || Date.now()
     };
     this.props.onCloseDialog(newItem);
   }
