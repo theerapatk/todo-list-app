@@ -4,13 +4,20 @@ class Checkbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.data
+      checked: this.props.checked
     };
+    this.toggleCheckbox = this.toggleCheckbox.bind(this);
+  }
+
+  toggleCheckbox() {
+    this.setState({
+      checked: !this.state.checked
+    });
   }
 
   render() {
     return (
-       <input type="checkbox" checked={this.state.data}/>
+       <input type="checkbox" checked={this.state.checked} onClick={this.toggleCheckbox}/>
     );
   }
 }
