@@ -17,6 +17,7 @@ class TodoApp extends Component {
     };
     this.handleOpenTodoDialog = this.handleOpenTodoDialog.bind(this);
     this.handleCloseTodoDialog = this.handleCloseTodoDialog.bind(this);
+    this.handleChangeFilterType = this.handleChangeFilterType.bind(this);
   }
 
   handleOpenTodoDialog(e, taskId) {
@@ -48,11 +49,15 @@ class TodoApp extends Component {
     }
   }
 
+  handleChangeFilterType(filterType) {
+    this.setState({filterType: filterType});
+  }  
+
   render() {
     return (
       <div>
         <TodoHeader onClickAddBotton={this.handleOpenTodoDialog}/>
-        <TodoFilter/>
+        <TodoFilter filterType={this.state.filterType} onChange={this.handleChangeFilterType}/>
         <TodoDialog
           isDialogActive={this.state.isDialogActive}
           isEditing={this.state.isEditing}

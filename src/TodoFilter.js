@@ -11,10 +11,12 @@ class TodoFilter extends Component {
 
   handleChange(e) {
     this.setState({filterType: e.target.value});
+    this.props.onChange(e.target.value);
   }
 
   render() {
     const {filterType} = this.state;
+    
     return (
       <div>
         Filters:

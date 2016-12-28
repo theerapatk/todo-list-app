@@ -6,18 +6,16 @@ class Checkbox extends Component {
     this.state = {
       checked: this.props.checked
     };
-    this.toggleCheckbox = this.toggleCheckbox.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  toggleCheckbox() {
-    this.setState({
-      checked: !this.state.checked
-    });
+  handleChange() {
+    this.setState({checked: !this.state.checked});
   }
 
   render() {
     return (
-       <input type="checkbox" checked={this.state.checked} onChange={this.toggleCheckbox}/>
+       <input type="checkbox" checked={this.state.checked} onChange={this.handleChange}/>
     );
   }
 }
