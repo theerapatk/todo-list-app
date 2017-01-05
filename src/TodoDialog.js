@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from 'react-awesome-modal';
+import { Modal, Button } from 'react-bootstrap';
 
 class TodoDialog extends Component {
   constructor(props) {
@@ -51,28 +51,30 @@ class TodoDialog extends Component {
     }
 
     return (
-      <Modal 
-        visible={this.props.isDialogActive}
-        width="400"
-        height="300"
-        effect="fadeInUp"
-        onClickAway={this.handleCloseDialog}>
-        <div>
-          <h3>{headerText}</h3>
-          <form>
+      <div>
+        <Modal 
+          show={this.props.isDialogActive}
+          onHide={this.handleCloseDialog}
+          container={this}
+          aria-labelledby="contained-modal-title">
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title">{headerText}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form>
             Title: {this.state.warningText}
             <input type="text" id="title" value={this.state.title || ''} onChange={this.handleChange}/><br/>
-            <input type="submit" id="date" value="OK" onClick={this.submitModal}/>
-            <input type="button" id="date" value="Cancel" onClick={this.handleCloseDialog}/><br/>
+            <Button onClick={this.submitModal}>OK</Button>
+            <Button onClick={this.handleCloseDialog}>Cancel</Button>
           </form>
-        </div>
-      </Modal>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.handleCloseDialog}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     );
   }
 }
 
 module.exports = TodoDialog;
-// Description:
-// <input type="text" id="description" onChange={this.handleChange('description')}/><br/>
-// Date:
-// <input type="text" id="date" onChange={this.handleChange('date')}/><br/>

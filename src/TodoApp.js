@@ -15,9 +15,21 @@ class TodoApp extends Component {
       defaultValue: '',
       taskId: null
     };
+    this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
     this.handleOpenTodoDialog = this.handleOpenTodoDialog.bind(this);
     this.handleCloseTodoDialog = this.handleCloseTodoDialog.bind(this);
     this.handleChangeFilterType = this.handleChangeFilterType.bind(this);
+  }
+
+  handleCheckboxClick(checked, id) {
+    var newItems = this.state.items.slice();
+    for (let i = 0; i < newItems.length; i++) {
+      if (newItems[i].id === id) {
+        newItems[i].completed = checked;
+        break;
+      }
+    }
+    this.setState({items: newItems});
   }
 
   handleOpenTodoDialog(e, taskId) {
@@ -55,7 +67,7 @@ class TodoApp extends Component {
 
   render() {
     return (
-      <div>
+      <div className="modal-container" style={{height: 500}}>
         <TodoHeader onClickAddBotton={this.handleOpenTodoDialog}/>
         <TodoFilter filterType={this.state.filterType} onChange={this.handleChangeFilterType}/>
         <TodoDialog
@@ -67,7 +79,11 @@ class TodoApp extends Component {
         <div>
           {'Add #' + (this.state.items.length)}
         </div>
-        <TodoList filterType={this.state.filterType} items={this.state.items} onClickItemLabel={this.handleOpenTodoDialog}/>
+        <TodoList
+          filterType={this.state.filterType}
+          items={this.state.items}
+          onCheckboxClick={this.handleCheckboxClick}
+          onTaskClick={this.handleOpenTodoDialog}/>
       </div>
     );
   }

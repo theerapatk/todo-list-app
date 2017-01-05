@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Radio } from 'react-bootstrap';
 
 class TodoFilter extends Component {
   constructor(props) {
@@ -20,24 +21,21 @@ class TodoFilter extends Component {
     return (
       <div>
         Filters:
-        <input
-          type="radio"
-          name="all"
+        <Radio inline
           value="all"
           checked={filterType==="all"}
-          onChange={this.handleChange}/>{'All'}
-        <input
-          type="radio"
-          name="completed"
+          onChange={this.handleChange}>{'All'}
+        </Radio>
+        <Radio inline
           value="completed"
           checked={filterType==="completed"}
-          onChange={this.handleChange}/>{'Completed'}
-        <input
-          type="radio"
-          name="not_completed"
+          onChange={this.handleChange}>{'Completed'}
+        </Radio>
+        <Radio inline
           value="not_completed"
           checked={filterType==="not_completed"}
-          onChange={this.handleChange}/>{'Not Completed'}
+          onChange={this.handleChange}>{'Not Completed'}
+        </Radio>
       </div>
     );
   }

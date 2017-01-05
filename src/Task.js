@@ -7,7 +7,7 @@ class Task extends Component {
   }
 
   handleClick(e) {
-    this.props.onClick(e, this.props.item.id);
+    this.props.onClick(e);
   }
 
   render() {

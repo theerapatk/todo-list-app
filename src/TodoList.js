@@ -4,11 +4,16 @@ import ListItem from './ListItem';
 class TodoList extends Component {
 	constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
+    this.handleTaskClick = this.handleTaskClick.bind(this);
   }
 
-  handleClick(e, taskId) {
-    this.props.onClickItemLabel(e, taskId);
+  handleCheckboxClick(checked, id) {
+    this.props.onCheckboxClick(checked, id);
+  }
+
+  handleTaskClick(e, id) {
+    this.props.onTaskClick(e, id);
   }
 
   render() {
@@ -19,11 +24,11 @@ class TodoList extends Component {
         {this.props.items.map(item => {
           var row = [];
           if (filterType === 'completed' && item.completed === true) {
-            row.push(<ListItem key={item.id} item={item} onClick={this.handleClick}/>);
+            row.push(<ListItem key={item.id} item={item} onCheckboxClick={this.handleCheckboxClick} onTaskClick={this.handleTaskClick}/>);
           } else if (filterType === 'not_completed' && item.completed === false) {
-            row.push(<ListItem key={item.id} item={item} onClick={this.handleClick}/>);
+            row.push(<ListItem key={item.id} item={item} onCheckboxClick={this.handleCheckboxClick} onTaskClick={this.handleTaskClick}/>);
           } else if (filterType === 'all') {
-            row.push(<ListItem key={item.id} item={item} onClick={this.handleClick}/>);
+            row.push(<ListItem key={item.id} item={item} onCheckboxClick={this.handleCheckboxClick} onTaskClick={this.handleTaskClick}/>);
           }
           return row;
         })}
