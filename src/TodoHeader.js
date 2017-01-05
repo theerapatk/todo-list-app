@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 
 class TodoHeader extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
     	<div>

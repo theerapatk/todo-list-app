@@ -32,9 +32,17 @@ class TodoApp extends Component {
     this.setState({items: newItems});
   }
 
-  handleOpenTodoDialog(e, taskId) {
+  handleOpenTodoDialog(e, id) {
     if (e.target.classList.value === 'task-label') {
-      this.setState({isEditing: true, defaultValue: e.target.textContent, taskId: taskId});
+      var newItems = this.state.items.slice();
+      for (let i = 0; i < newItems.length; i++) {
+        if (newItems[i].id === id) {
+          newItems[i].title = e.target.textContent;
+          break;
+        }
+      }
+      this.setState({isEditing: true, defaultValue: e.target.textContent, taskId: id});
+      this.setState({items: newItems});
     } else {
       this.setState({isEditing: false, defaultValue: '', taskId: null});
     }
@@ -65,7 +73,18 @@ class TodoApp extends Component {
     this.setState({filterType: filterType});
   }  
 
+  saveToLocalStorage() {
+    var todoAppData = {
+      appState: {
+        filterType: this.state.filterType
+      },        
+      todoList: this.state.items
+    };
+    localStorage.setItem('todoAppData', JSON.stringify(todoAppData));
+  }
+
   render() {
+    this.saveToLocalStorage();
     return (
       <div className="modal-container" style={{height: 500}}>
         <TodoHeader onClickAddBotton={this.handleOpenTodoDialog}/>
