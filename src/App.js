@@ -5,20 +5,24 @@ import TodoApp from './TodoApp';
 
 class App extends Component {
   render() {
-    // var todos = JSON.parse(localStorage.getItem('todos')) || [];
-    var test = [{
-    		title: 'test',
-    		completed: false,
-    		id: 1
-    	}, {
-    		title: 'test2',
-    		completed: true,
-    		id: 2
-    	}
-    ];
+    // var todos = JSON.parse(localStorage.getItem('appData')) || {appState:{filterType: 'all'}, todoList:[]};
+    var mockData = {
+      appState: {
+        filterType: 'all'
+      },
+      todoList: [{
+        title: 'test',
+        completed: false,
+        id: 1
+      }, {
+        title: 'test2',
+        completed: true,
+        id: 2
+      }]
+    }
 
     return (
-      <TodoApp todos={test}/>
+      <TodoApp data={mockData}/>
     );
   }
 }

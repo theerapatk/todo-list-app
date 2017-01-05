@@ -8,12 +8,12 @@ class TodoApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: this.props.todos,
+      items: this.props.data.todoList,
+      filterType: this.props.data.appState.filterType,
       isDialogActive: false,
       isEditing: false,
       defaultValue: '',
-      taskId: null,
-      filterType: 'all'
+      taskId: null
     };
     this.handleOpenTodoDialog = this.handleOpenTodoDialog.bind(this);
     this.handleCloseTodoDialog = this.handleCloseTodoDialog.bind(this);
