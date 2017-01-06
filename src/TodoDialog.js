@@ -75,14 +75,14 @@ class TodoDialog extends Component {
                 id={'title'}
                 fieldValue={(this.props.selectedItem) ? this.props.selectedItem.title.trim() : ''} 
                 onChange={this.handleDialogInputChange} />
-              <Button
-                disabled={this.state.disableOKButton}
-                onClick={this.submitModal}>OK</Button>
-              <Button onClick={this.handleCloseDialog}>Cancel</Button>
             </form>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleCloseDialog}>Close</Button>
+            <Button
+              bsStyle="primary"
+              disabled={this.state.disableOKButton}
+              onClick={this.submitModal}>Save</Button>
           </Modal.Footer>
         </Modal>
       </div>
