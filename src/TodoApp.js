@@ -12,8 +12,7 @@ class TodoApp extends Component {
       filterType: this.props.data.appState.filterType,
       isDialogActive: false,
       isEditing: false,
-      defaultValue: '',
-      taskId: null
+      selectedItem: null
     };
     this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
     this.handleOpenTodoDialog = this.handleOpenTodoDialog.bind(this);
@@ -33,34 +32,35 @@ class TodoApp extends Component {
   }
 
   handleOpenTodoDialog(e, id) {
-    if (e.target.classList.value === 'task-label') {
+    var selectedItem = null;
+    if (e.currentTarget.classList.value === 'task-label') {
       var newItems = this.state.items.slice();
       for (let i = 0; i < newItems.length; i++) {
         if (newItems[i].id === id) {
-          newItems[i].title = e.target.textContent;
+          newItems[i].title = e.currentTarget.textContent;
+          selectedItem = Object.assign({}, newItems[i]);
           break;
         }
       }
-      this.setState({isEditing: true, defaultValue: e.target.textContent, taskId: id});
-      this.setState({items: newItems});
+      this.setState({items: newItems, isEditing: true});
     } else {
-      this.setState({isEditing: false, defaultValue: '', taskId: null});
+      this.setState({isEditing: false});
     }
-    this.setState({isDialogActive: true});
+    this.setState({isDialogActive: true, selectedItem: selectedItem});
   }
 
   handleCloseTodoDialog(newItem) {
     this.setState({isDialogActive: false});
     if (newItem != null) {
       if (this.state.isEditing === true) {
-        var newItems = this.state.items.slice();
-        for (let i = 0; i < newItems.length; i++) {
-          if (newItems[i].id === this.state.taskId) {
-            newItems[i] = newItem;
+        var currentItems = this.state.items.slice();
+        for (let i = 0; i < currentItems.length; i++) {
+          if (currentItems[i].id === newItem.id) {
+            currentItems[i] = newItem;
             break;
           }
         }
-        this.setState({items: newItems});
+        this.setState({items: currentItems});
       } else {
         this.setState((prevState) => ({
           items: prevState.items.concat(newItem),
@@ -86,23 +86,26 @@ class TodoApp extends Component {
   render() {
     this.saveToLocalStorage();
     return (
-      <div className="modal-container" style={{height: '100%'}}>
-        <TodoHeader onClickAddBotton={this.handleOpenTodoDialog}/>
-        <TodoFilter filterType={this.state.filterType} onChange={this.handleChangeFilterType}/>
+      <div 
+        className="modal-container"
+        style={{height: '100%'}}>
+        <TodoHeader onClickAddBotton={this.handleOpenTodoDialog} />
+        <TodoFilter
+          filterType={this.state.filterType}
+          onChange={this.handleChangeFilterType} />
         <TodoDialog
           isDialogActive={this.state.isDialogActive}
           isEditing={this.state.isEditing}
-          taskId={this.state.taskId}
-          defaultValue={this.state.defaultValue}
-          onCloseDialog={this.handleCloseTodoDialog}/>
+          selectedItem={this.state.selectedItem}
+          onCloseDialog={this.handleCloseTodoDialog} />
         <div>
-          {'Add #' + (this.state.items.length)}
+          {'Total task(s): ' + (this.state.items.length)}
         </div>
         <TodoList
           filterType={this.state.filterType}
           items={this.state.items}
           onCheckboxClick={this.handleCheckboxClick}
-          onTaskClick={this.handleOpenTodoDialog}/>
+          onTaskClick={this.handleOpenTodoDialog} />
       </div>
     );
   }

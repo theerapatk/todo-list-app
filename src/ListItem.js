@@ -29,8 +29,12 @@ class ListItem extends Component {
 
     return (
       <li>
-        <Checkbox checked={this.state.checked} onChange={this.handleCheckboxClick}>
-        	<Task item={item} onClick={this.handleTaskClick}/>
+        <Checkbox
+          checked={this.state.checked}
+          onChange={this.handleCheckboxClick}>
+        	<Task
+            item={item}
+            onClick={this.handleTaskClick} />
         </Checkbox>
       </li>
     );

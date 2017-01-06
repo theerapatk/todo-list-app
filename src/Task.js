@@ -12,7 +12,9 @@ class Task extends Component {
 
   render() {
     return (
-      <span className="task-label" onClick={this.handleClick}>
+      <span
+        className="task-label"
+        onClick={this.handleClick}>
         {(this.props.item.completed) ? <strike>{this.props.item.title}</strike> : this.props.item.title}
       </span>
     );
