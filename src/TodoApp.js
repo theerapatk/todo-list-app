@@ -86,7 +86,7 @@ class TodoApp extends Component {
   render() {
     this.saveToLocalStorage();
     return (
-      <div className="modal-container" style={{height: 500}}>
+      <div className="modal-container" style={{height: '100%'}}>
         <TodoHeader onClickAddBotton={this.handleOpenTodoDialog}/>
         <TodoFilter filterType={this.state.filterType} onChange={this.handleChangeFilterType}/>
         <TodoDialog
