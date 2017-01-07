@@ -7,7 +7,7 @@ class TodoHeader extends Component {
       <div className='page-header'>
         <div className='btn-toolbar pull-right'>
             <div className='btn-group'>
-                <Button onClick={this.props.onClickAddBotton}>Add</Button>
+                <Button bsStyle="primary" onClick={this.props.onClickAddBotton}>Add</Button>
             </div>
         </div>
         <h2>{this.props.headerText}</h2>
