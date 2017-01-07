@@ -25,7 +25,7 @@ class TodoList extends Component {
     const {filterType} = this.props;
 
     return (
-      <ul>
+      <ul className="TodoList-ul">
         {this.props.items.map(item => {
           var row = [];
           if (filterType === 'completed' && item.completed === true) {

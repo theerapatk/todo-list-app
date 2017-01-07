@@ -20,6 +20,7 @@ class ConfirmDialog extends Component {
     return (
       <div>
         <Modal 
+          dialogClassName="ConfirmDialog-modal"
           show={this.props.isDialogActive}
           onHide={this.handleCloseDialog}
           container={this}

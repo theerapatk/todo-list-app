@@ -58,6 +58,7 @@ class TodoDialog extends Component {
     return (
       <div>
         <Modal 
+          dialogClassName="TodoDialog-modal"
           show={this.props.isDialogActive}
           onEnter={this.handleDialogEnter}
           onHide={this.handleCloseDialog}

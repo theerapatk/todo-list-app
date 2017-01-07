@@ -19,27 +19,31 @@ class TodoFilter extends Component {
     const {filterType} = this.state;
     
     return (
-      <div>
-        Filters:
-        <Radio
-          inline
-          value="all"
-          checked={filterType==="all"}
-          onChange={this.handleChange}>{'All'}
-        </Radio>
-        <Radio
-          inline
-          value="active"
-          checked={filterType==="active"}
-          onChange={this.handleChange}>{'Active'}
-        </Radio>
-        <Radio
-          inline
-          value="completed"
-          checked={filterType==="completed"}
-          onChange={this.handleChange}>{'Completed'}
-        </Radio>
-      </div>
+      <form className="form-horizontal">
+        <div className="form-group">
+          <label className="control-label col-sm-3">Filters:</label>
+            <div className="col-sm-9">
+              <Radio
+                inline
+                value="all"
+                checked={filterType==="all"}
+                onChange={this.handleChange}>{'All'}
+              </Radio>
+              <Radio
+                inline
+                value="active"
+                checked={filterType==="active"}
+                onChange={this.handleChange}>{'Active'}
+              </Radio>
+              <Radio
+                inline
+                value="completed"
+                checked={filterType==="completed"}
+                onChange={this.handleChange}>{'Completed'}
+              </Radio>
+            </div>
+        </div>
+      </form>
     );
   }
 }

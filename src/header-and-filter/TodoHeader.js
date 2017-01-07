@@ -4,9 +4,13 @@ import { Button } from 'react-bootstrap';
 class TodoHeader extends Component {
   render() {
     return (
-    	<div>
-        <span className="header-element"><h3>Remiders</h3></span>
-				<span className="header-element"><Button onClick={this.props.onClickAddBotton}>Add</Button></span>
+      <div className='page-header'>
+        <div className='btn-toolbar pull-right'>
+            <div className='btn-group'>
+                <Button onClick={this.props.onClickAddBotton}>Add</Button>
+            </div>
+        </div>
+        <h2>{this.props.headerText}</h2>
       </div>
     );
   }

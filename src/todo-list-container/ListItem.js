@@ -51,7 +51,7 @@ class ListItem extends Component {
     const {item} = this.props
 
     return (
-      <li>
+      <li className="ListItem-row">
         <Form inline>
           <Checkbox
             className="ListItem-checkbox"
@@ -59,7 +59,7 @@ class ListItem extends Component {
             onChange={this.handleCheckboxClick}>
             <Task item={item} onClick={this.handleTaskClick} />
           </Checkbox>
-          <Button onClick={this.handleOpenDialog}>Delete</Button>
+          <Button bsSize="small" onClick={this.handleOpenDialog}>Delete</Button>
           <ConfirmDialog
             isDialogActive={this.state.isDialogActive}
             title={'Delete Task'}

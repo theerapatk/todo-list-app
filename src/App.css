@@ -1,19 +1,42 @@
-form {
-	display: block;
-}
-
 ul {
 	list-style-type: none;
 }
 
-.Task-label {
+span.label.label-default {
+    bottom: 1px;
+    position: relative;
+}
+
+.TodoApp-container {
+	height: 100%;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.TodoList-ul {
+	max-height: 560px;
+    overflow-y: auto;
+}
+
+.ListItem-row {
+	margin: 5px 5px 5px 5px;
+}
+
+.ListItem-row .Task-label {
 	width: 200px;
     position: absolute;
     cursor: pointer;
+    padding-left: 5px;
 }
 
-.header-element {
+.ListItem-row .ListItem-checkbox {
 	display: inline-block;
+	width: 430px;
+}
+
+.ListItem-row .Task-completed {
+    color: #cccccc;
+    text-decoration: line-through;
 }
 
 .modal-container {
@@ -25,12 +48,10 @@ ul {
   position: absolute;
 }
 
-.ListItem-checkbox {
-	display: inline-block;
-	width: 500px;
+.TodoDialog-modal {
+	width: 80%;
 }
 
-.Task-completed {
-    color: #cccccc;
-    text-decoration: line-through;
+.ConfirmDialog-modal {
+	width: 60%;
 }

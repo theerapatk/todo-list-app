@@ -3,6 +3,7 @@ import TodoHeader from './header-and-filter/TodoHeader';
 import TodoFilter from './header-and-filter/TodoFilter';
 import TodoList from './todo-list-container/TodoList';
 import TodoDialog from './dialog/TodoDialog';
+import { Label } from 'react-bootstrap';
 
 class TodoApp extends Component {
   constructor(props) {
@@ -98,8 +99,8 @@ class TodoApp extends Component {
   render() {
     this.saveToLocalStorage();
     return (
-      <div className="modal-container" style={{height: '100%'}}>
-        <TodoHeader onClickAddBotton={this.handleOpenTodoDialog} />
+      <div className="TodoApp-container container modal-container">
+        <TodoHeader headerText={'Remiders'} onClickAddBotton={this.handleOpenTodoDialog} />
         <TodoFilter
           filterType={this.state.filterType}
           onChange={this.handleChangeFilterType} />
@@ -108,9 +109,17 @@ class TodoApp extends Component {
           isEditing={this.state.isEditing}
           selectedItem={this.state.selectedItem}
           onCloseDialog={this.handleCloseTodoDialog} />
-        <div>
-          {'Total task(s): ' + (this.state.items.length)}
-        </div>
+
+        <form className="form-horizontal">
+          <div className="form-group">
+            <label className="control-label col-sm-3">{'Total task(s): ' + (this.state.items.length)}</label>
+              <div className="col-sm-9">
+                  <Label>NOTE</Label> {'    '}
+                  <label className="control-label">{'Click on a task\'s label to view or edit task'}</label>
+              </div>
+          </div>
+        </form>
+
         <TodoList
           filterType={this.state.filterType}
           items={this.state.items}
