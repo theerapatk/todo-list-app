@@ -25,7 +25,7 @@ class TodoList extends Component {
           var row = [];
           if (filterType === 'completed' && item.completed === true) {
             row.push(<ListItem key={item.id} item={item} onCheckboxClick={this.handleCheckboxClick} onTaskClick={this.handleTaskClick}/>);
-          } else if (filterType === 'not_completed' && item.completed === false) {
+          } else if (filterType === 'active' && item.completed === false) {
             row.push(<ListItem key={item.id} item={item} onCheckboxClick={this.handleCheckboxClick} onTaskClick={this.handleTaskClick}/>);
           } else if (filterType === 'all') {
             row.push(<ListItem key={item.id} item={item} onCheckboxClick={this.handleCheckboxClick} onTaskClick={this.handleTaskClick}/>);

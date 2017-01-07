@@ -33,7 +33,7 @@ class TodoApp extends Component {
 
   handleOpenTodoDialog(e, id) {
     var selectedItem = null;
-    if (e.currentTarget.classList.value === 'task-label') {
+    if (e.currentTarget.classList.contains('Task-label')) {
       var newItems = this.state.items.slice();
       for (let i = 0; i < newItems.length; i++) {
         if (newItems[i].id === id) {
@@ -86,9 +86,7 @@ class TodoApp extends Component {
   render() {
     this.saveToLocalStorage();
     return (
-      <div 
-        className="modal-container"
-        style={{height: '100%'}}>
+      <div className="modal-container" style={{height: '100%'}}>
         <TodoHeader onClickAddBotton={this.handleOpenTodoDialog} />
         <TodoFilter
           filterType={this.state.filterType}

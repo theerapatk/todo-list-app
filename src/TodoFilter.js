@@ -29,15 +29,15 @@ class TodoFilter extends Component {
         </Radio>
         <Radio
           inline
-          value="completed"
-          checked={filterType==="completed"}
-          onChange={this.handleChange}>{'Completed'}
+          value="active"
+          checked={filterType==="active"}
+          onChange={this.handleChange}>{'Active'}
         </Radio>
         <Radio
           inline
-          value="not_completed"
-          checked={filterType==="not_completed"}
-          onChange={this.handleChange}>{'Not Completed'}
+          value="completed"
+          checked={filterType==="completed"}
+          onChange={this.handleChange}>{'Completed'}
         </Radio>
       </div>
     );

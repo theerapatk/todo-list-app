@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Checkbox } from 'react-bootstrap';
+import { Checkbox, Button, Form, FormGroup } from 'react-bootstrap';
 import Task from './Task';
 
 class ListItem extends Component {
@@ -29,13 +29,14 @@ class ListItem extends Component {
 
     return (
       <li>
-        <Checkbox
-          checked={this.state.checked}
-          onChange={this.handleCheckboxClick}>
-        	<Task
-            item={item}
-            onClick={this.handleTaskClick} />
-        </Checkbox>
+        <Form inline>
+          <Checkbox
+            className="ListItem-checkbox"
+            checked={this.state.checked}
+            onChange={this.handleCheckboxClick}>
+            <Task item={item} onClick={this.handleTaskClick} />
+          </Checkbox>
+        </Form>
       </li>
     );
   }

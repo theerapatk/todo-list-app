@@ -11,11 +11,12 @@ class Task extends Component {
   }
 
   render() {
+    let taskCompleted = this.props.item.completed ? 'Task-completed' : '';
+    let cssClasses = `${taskCompleted} Task-label`;
+
     return (
-      <span
-        className="task-label"
-        onClick={this.handleClick}>
-        {(this.props.item.completed) ? <strike>{this.props.item.title}</strike> : this.props.item.title}
+      <span className={cssClasses} onClick={this.handleClick}>
+        {this.props.item.title}
       </span>
     );
   }
