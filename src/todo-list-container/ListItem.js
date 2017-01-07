@@ -11,6 +11,7 @@ class ListItem extends Component {
     }
     this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
     this.handleTaskClick = this.handleTaskClick.bind(this);
+    this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this);
   }
 
   handleCheckboxClick() {
@@ -20,8 +21,12 @@ class ListItem extends Component {
   }
 
   handleTaskClick(e) {
-  	e.preventDefault();
+    e.preventDefault();
     this.props.onTaskClick(e, this.state.id);
+  }
+
+  handleDeleteButtonClick() {
+    this.props.onDeleteButtonClick(this.state.id);
   }
 
   render() {
@@ -36,6 +41,7 @@ class ListItem extends Component {
             onChange={this.handleCheckboxClick}>
             <Task item={item} onClick={this.handleTaskClick} />
           </Checkbox>
+          <Button onClick={this.handleDeleteButtonClick}>Delete</Button>
         </Form>
       </li>
     );

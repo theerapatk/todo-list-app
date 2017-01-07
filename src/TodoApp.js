@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import TodoHeader from './TodoHeader';
-import TodoFilter from './TodoFilter';
-import TodoList from './TodoList';
-import TodoDialog from './TodoDialog';
+import TodoHeader from './header-and-filter/TodoHeader';
+import TodoFilter from './header-and-filter/TodoFilter';
+import TodoList from './todo-list-container/TodoList';
+import TodoDialog from './dialog/TodoDialog';
 
 class TodoApp extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class TodoApp extends Component {
       selectedItem: null
     };
     this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
+    this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this);
     this.handleOpenTodoDialog = this.handleOpenTodoDialog.bind(this);
     this.handleCloseTodoDialog = this.handleCloseTodoDialog.bind(this);
     this.handleChangeFilterType = this.handleChangeFilterType.bind(this);
@@ -25,6 +26,17 @@ class TodoApp extends Component {
     for (let i = 0; i < newItems.length; i++) {
       if (newItems[i].id === id) {
         newItems[i].completed = checked;
+        break;
+      }
+    }
+    this.setState({items: newItems});
+  }
+
+  handleDeleteButtonClick(id) {
+    var newItems = this.state.items.slice();
+    for (let i = 0; i < newItems.length; i++) {
+      if (newItems[i].id === id) {
+        newItems.splice(i, 1); 
         break;
       }
     }
@@ -68,7 +80,7 @@ class TodoApp extends Component {
       }
     }
   }
-
+  
   handleChangeFilterType(filterType) {
     this.setState({filterType: filterType});
   }  
@@ -103,7 +115,8 @@ class TodoApp extends Component {
           filterType={this.state.filterType}
           items={this.state.items}
           onCheckboxClick={this.handleCheckboxClick}
-          onTaskClick={this.handleOpenTodoDialog} />
+          onTaskClick={this.handleOpenTodoDialog}
+          onDeleteButtonClick={this.handleDeleteButtonClick} />
       </div>
     );
   }
