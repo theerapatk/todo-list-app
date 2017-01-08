@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import DialogInput from './DialogInput';
-// import DatePicker from 'react-bootstrap-date-picker';
+import DialogDatePicker from './DialogDatePicker';
 
 class TodoDialog extends Component {
   constructor(props) {
@@ -17,15 +17,20 @@ class TodoDialog extends Component {
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
   }
 
-  handleDialogInputChange(key, value, disabled) {
+  handleDialogInputChange(key, value) {
     this.fieldValues[key] = value;
-    this.setState({disableOKButton: disabled});
+    if (this.fieldValues.title == null || this.fieldValues.title === '') {
+      this.setState({disableOKButton: true});
+    } else {
+      this.setState({disableOKButton: false});
+    }
   }
 
   submitModal(e) {
     e.preventDefault();
     var title = this.fieldValues.title;
     var description = this.fieldValues.description;
+    var date = this.fieldValues.date;
     var completed = false;
     var id = Date.now();
     if (this.props.selectedItem) {
@@ -39,6 +44,7 @@ class TodoDialog extends Component {
     var newItem = {
       title: title,
       description: description,
+      date: date,
       completed: completed,
       id: id
     };
@@ -48,12 +54,14 @@ class TodoDialog extends Component {
   handleDialogEnter() {
     this.fieldValues = {
       title: '',
-      description: ''
+      description: '',
+      date: ''
     };
 
     if (this.props.isEditing === true && this.props.selectedItem) {
       this.fieldValues.title = this.props.selectedItem.title;
       this.fieldValues.description = this.props.selectedItem.description;
+      this.fieldValues.date = this.props.selectedItem.date;
       this.setState({disableOKButton: false});
     } else {
       this.setState({disableOKButton: true});
@@ -97,6 +105,12 @@ class TodoDialog extends Component {
                 label={'Description'}
                 id={'description'}
                 fieldValue={(this.props.selectedItem && this.props.selectedItem.description) ? this.props.selectedItem.description.trim() : ''} 
+                isEditing={this.props.isEditing}
+                isInViewMode={this.state.isInViewMode}
+                onChange={this.handleDialogInputChange} />
+              <DialogDatePicker
+                label={'Date'}
+                fieldValue={(this.props.selectedItem && this.props.selectedItem.date) ? this.props.selectedItem.date : ''} 
                 isEditing={this.props.isEditing}
                 isInViewMode={this.state.isInViewMode}
                 onChange={this.handleDialogInputChange} />

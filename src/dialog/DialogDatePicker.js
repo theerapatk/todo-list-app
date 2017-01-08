@@ -1,31 +1,26 @@
 import React, { Component } from 'react';
+import DatePicker from 'react-bootstrap-date-picker';
 import { Form, Col, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-class DialogInput extends Component {
+class DialogDatePicker extends Component {
   constructor(props) {
     super(props);
+    let date = this.props.fieldValue ? new Date(this.props.fieldValue).toISOString() : '';
     this.state = {
-      value: this.props.fieldValue
+      value: date
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e) {
-    this.setState({value: e.target.value});
-    this.props.onChange(e.target.id, e.target.value);
+  handleChange(value) {
+    this.setState({value: value});
+    this.props.onChange('date', value);
   }
 
   render() {
-    var isError = false;
-    if (this.props.id === 'title') {
-      if (this.state.value == null || this.state.value.trim() === '') {
-        isError = true;
-      }
-    }
-
     return (
       <Form componentClass="fieldset" horizontal>
-        <FormGroup validationState={isError ? 'error' : null}>
+        <FormGroup>
           <Col componentClass={ControlLabel} xs={3}>
             {this.props.label}
           </Col>
@@ -35,11 +30,8 @@ class DialogInput extends Component {
                   {this.state.value}
                 </FormControl.Static>
               ) : (
-                <FormControl
-                  type="text"
-                  id={this.props.id}
+                <DatePicker
                   value={this.state.value}
-                  placeholder={isError ? 'Required' : null}
                   onChange={this.handleChange} />
               )
             }
@@ -50,4 +42,4 @@ class DialogInput extends Component {
   }
 }
 
-module.exports = DialogInput;
+module.exports = DialogDatePicker;
