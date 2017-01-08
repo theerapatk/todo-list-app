@@ -7,11 +7,13 @@ class TodoDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isInViewMode: true,
       disableOKButton: true
     };
     this.handleDialogInputChange = this.handleDialogInputChange.bind(this);
     this.submitModal = this.submitModal.bind(this);
     this.handleDialogEnter = this.handleDialogEnter.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
   }
 
@@ -56,6 +58,11 @@ class TodoDialog extends Component {
     } else {
       this.setState({disableOKButton: true});
     }
+    this.setState({isInViewMode: true});
+  }
+
+  handleEditClick() {
+    this.setState({isInViewMode: !this.state.isInViewMode});
   }
 
   handleCloseDialog() {
@@ -83,15 +90,20 @@ class TodoDialog extends Component {
                 label={'Title'}
                 id={'title'}
                 fieldValue={(this.props.selectedItem && this.props.selectedItem.title) ? this.props.selectedItem.title.trim() : ''} 
+                isEditing={this.props.isEditing}
+                isInViewMode={this.state.isInViewMode}
                 onChange={this.handleDialogInputChange} />
               <DialogInput
                 label={'Description'}
                 id={'description'}
                 fieldValue={(this.props.selectedItem && this.props.selectedItem.description) ? this.props.selectedItem.description.trim() : ''} 
+                isEditing={this.props.isEditing}
+                isInViewMode={this.state.isInViewMode}
                 onChange={this.handleDialogInputChange} />
             </form>
           </Modal.Body>
           <Modal.Footer>
+            {(this.props.isEditing) ? <Button onClick={this.handleEditClick} style={{float: 'left'}}>Edit</Button> : null}
             <Button onClick={this.handleCloseDialog}>Close</Button>
             <Button
               bsStyle="primary"

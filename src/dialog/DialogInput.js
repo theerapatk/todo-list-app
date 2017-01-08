@@ -36,11 +36,17 @@ class DialogInput extends Component {
             {this.props.label}
           </Col>
           <Col xs={9}>
-            <FormControl
-              type="text"
-              id={this.props.id}
-              value={this.state.value}
-              onChange={this.handleChange} />
+            {this.props.isEditing && this.props.isInViewMode ? (
+                <FormControl.Static>
+                  {this.state.value}
+                </FormControl.Static>
+              ) : (
+                <FormControl
+                  type="text"
+                  id={this.props.id}
+                  value={this.state.value}
+                  onChange={this.handleChange} />
+              )}
           </Col>
         </FormGroup>
       </Form>
