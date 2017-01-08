@@ -5,7 +5,7 @@ class DialogInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.fieldValue,
+      value: this.props.fieldValue
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -22,16 +22,16 @@ class DialogInput extends Component {
   }
 
   render() {
-    var validationState = null;
+    var isError = false;
     if (this.props.id === 'title') {
       if (this.state.value == null || this.state.value.trim() === '') {
-        validationState = 'error';
+        isError = true;
       }
     }
 
     return (
       <Form componentClass="fieldset" horizontal>
-        <FormGroup validationState={validationState}>
+        <FormGroup validationState={isError ? 'error' : null}>
           <Col componentClass={ControlLabel} xs={3}>
             {this.props.label}
           </Col>
@@ -45,6 +45,7 @@ class DialogInput extends Component {
                   type="text"
                   id={this.props.id}
                   value={this.state.value}
+                  placeholder={isError ? 'Required' : null}
                   onChange={this.handleChange} />
               )}
           </Col>
