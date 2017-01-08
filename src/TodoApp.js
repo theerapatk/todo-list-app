@@ -115,7 +115,7 @@ class TodoApp extends Component {
             <label className="control-label col-sm-3">{'Total task(s): ' + (this.state.items.length)}</label>
               <div className="col-sm-9">
                   <Label>NOTE</Label> {'    '}
-                  <label className="control-label">{'Click on a task\'s label to view or edit task'}</label>
+                  <label className="control-label">{'Click on task label to view or edit it'}</label>
               </div>
           </div>
         </form>

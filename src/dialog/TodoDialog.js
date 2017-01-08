@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import DialogInput from './DialogInput';
+// import DatePicker from 'react-bootstrap-date-picker';
 
 class TodoDialog extends Component {
   constructor(props) {
@@ -15,13 +16,14 @@ class TodoDialog extends Component {
   }
 
   handleDialogInputChange(key, value, disabled) {
-    this[key] = value;
+    this.fieldValues[key] = value;
     this.setState({disableOKButton: disabled});
   }
 
   submitModal(e) {
     e.preventDefault();
-    var title = this.title;
+    var title = this.fieldValues.title;
+    var description = this.fieldValues.description;
     var completed = false;
     var id = Date.now();
     if (this.props.selectedItem) {
@@ -34,6 +36,7 @@ class TodoDialog extends Component {
     }
     var newItem = {
       title: title,
+      description: description,
       completed: completed,
       id: id
     };
@@ -41,11 +44,16 @@ class TodoDialog extends Component {
   }
 
   handleDialogEnter() {
-    if (this.props.selectedItem && this.props.selectedItem.title.trim() !== '') {
-      this.title = this.props.selectedItem.title;
+    this.fieldValues = {
+      title: '',
+      description: ''
+    };
+
+    if (this.props.isEditing === true && this.props.selectedItem) {
+      this.fieldValues.title = this.props.selectedItem.title;
+      this.fieldValues.description = this.props.selectedItem.description;
       this.setState({disableOKButton: false});
     } else {
-      this.title = '';
       this.setState({disableOKButton: true});
     }
   }
@@ -66,7 +74,7 @@ class TodoDialog extends Component {
           aria-labelledby="contained-modal-title">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title">
-              {(this.props.isEditing) ? 'Edit Task' : 'Add New Task'}
+              {(this.props.isEditing) ? `Edit Task (ID: ${this.props.selectedItem.id})` : 'Add New Task'}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -74,7 +82,12 @@ class TodoDialog extends Component {
               <DialogInput
                 label={'Title'}
                 id={'title'}
-                fieldValue={(this.props.selectedItem) ? this.props.selectedItem.title.trim() : ''} 
+                fieldValue={(this.props.selectedItem && this.props.selectedItem.title) ? this.props.selectedItem.title.trim() : ''} 
+                onChange={this.handleDialogInputChange} />
+              <DialogInput
+                label={'Description'}
+                id={'description'}
+                fieldValue={(this.props.selectedItem && this.props.selectedItem.description) ? this.props.selectedItem.description.trim() : ''} 
                 onChange={this.handleDialogInputChange} />
             </form>
           </Modal.Body>

@@ -23,8 +23,10 @@ class DialogInput extends Component {
 
   render() {
     var validationState = null;
-    if (this.state.value == null || this.state.value.trim() === '') {
-      validationState = 'error';
+    if (this.props.id === 'title') {
+      if (this.state.value == null || this.state.value.trim() === '') {
+        validationState = 'error';
+      }
     }
 
     return (
